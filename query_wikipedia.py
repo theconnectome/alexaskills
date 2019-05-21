@@ -12,12 +12,6 @@ from ask_sdk_core.handler_input import HandlerInput
 from ask_sdk_model.ui import SimpleCard
 from ask_sdk_model import Response
 
-app = Flask(__name__)
-ask = Ask(app, '/')
-logging.getLogger('flask_ask').setLevel(logging.DEBUG)
-
-
-
 @ask.intent("SearchWikipediaIntent")
 def query_wikipedia():
 	# Take a text query from the user
