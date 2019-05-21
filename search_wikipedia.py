@@ -12,35 +12,36 @@ logging.getLogger('flask_ask').setLevel(logging.DEBUG)
 
 
 @ask.intent("SearchWikipediaIntent")
-	def query_wikipedia():
-		# Take a text query from the user
-		query = input ("Query: ")
+def query_wikipedia():
+	# Take a text query from the user
+	query = input ("Query: ")
 
-		# Fetch the first Wikipedia result returned for that query
-		wiki_page = wikipedia.page(query)
+	# Fetch the first Wikipedia result returned for that query
+	wiki_page = wikipedia.page(query)
 
-		# Extract that page's title, summary, and full text
-		wiki_title = wiki_page.title
-		wiki_summary = wikipedia.summary(query)
-		wiki_fullpage = wiki_page.content
+	# Extract that page's title, summary, and full text
+	wiki_title = wiki_page.title
+	wiki_summary = wikipedia.summary(query)
+	wiki_fullpage = wiki_page.content
 
-		# Print the intro and summary
-		return question("Here is the Wikipedia entry for " + wiki_title + ":\n" + wiki_summary + "\n Would you like me to continue reading?\n")
+	# Print the intro and summary
+	return question("Here is the Wikipedia entry for " + wiki_title + ":\n" + wiki_summary + "\n Would you like me to continue reading?\n")
 
 @ask.intent("YesIntent")
+def full_page():
 	return statement(wiki_fullpage)
 	
 @ask.intent('AMAZON.StopIntent')
-	def stop():
-		return statement("Goodbye")
+def stop():
+	return statement("Goodbye")
 
 @ask.intent('AMAZON.CancelIntent')
-	def cancel():
-		return statement("Goodbye")
+def cancel():
+	return statement("Goodbye")
 
 @ask.session_ended
-	def session_ended():
-		return "{}", 200
+def session_ended():
+	return "{}", 200
 	
 if __name__ == '__main__':
     app.run(debug=True)
