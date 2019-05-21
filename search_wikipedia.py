@@ -2,6 +2,8 @@
 import wikipedia
 import urllib3
 import json
+from flask import Flask, render_template
+from flask_ask import Ask, statement, question, session
 
 def query_wikipedia():
 	# Take a text query from the user
