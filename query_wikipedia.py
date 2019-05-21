@@ -22,8 +22,6 @@ skill_name = "Search Wikipedia"
 wiki_intro = "Here is the Wikipedia entry for "
 wiki_summary_outro = " Would you like me to continue reading?"
 
-help_message = "You can say search Wikipedia, or, you can say exit... What can I help you with?"
-help_reprompt = "What can I help you with?"
 stop_message = "Okay!"
 fallback_message = "The Wikipedia skill can't help you with that. What can I help you with?"
 fallback_reprompt = 'What can I help you with?'
@@ -76,36 +74,6 @@ class YesMoreInfoIntentHandler(AbstractRequestHandler):
 		handler_input.response_builder.speak(speech)
 		return handler_input.response_builder.response
 
-
-class HelpIntentHandler(AbstractRequestHandler):
-	# Handler for Help Intent.
-	def can_handle(self, handler_input):
-		# type: (HandlerInput) -> bool
-		return is_intent_name("AMAZON.HelpIntent")(handler_input)
-
-	def handle(self, handler_input):
-		# type: (HandlerInput) -> Response
-		logger.info("In HelpIntentHandler")
-
-		handler_input.response_builder.speak(help_message).ask(
-			help_reprompt).set_card(SimpleCard(
-                skill_name, help_message))
-		return handler_input.response_builder.response
-
-
-class CancelOrStopIntentHandler(AbstractRequestHandler):
-	# Single handler for Cancel and Stop Intent.
-	def can_handle(self, handler_input):
-		# type: (HandlerInput) -> bool
-		return (is_intent_name("AMAZON.CancelIntent")(handler_input) or
-                is_intent_name("AMAZON.StopIntent")(handler_input))
-
-	def handle(self, handler_input):
-		# type: (HandlerInput) -> Response
-		logger.info("In CancelOrStopIntentHandler")
-
-		handler_input.response_builder.speak(stop_message)
-		return handler_input.response_builder.response
 
 
 class FallbackIntentHandler(AbstractRequestHandler):
